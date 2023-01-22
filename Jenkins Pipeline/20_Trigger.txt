@@ -1,0 +1,42 @@
+### TRIGGER ###
+
+Triggers adalah perintah yang digunakan untuk melakukan run job secara otomatis.
+
+Trigger Type
+
+Ada beberapa tipe trigger yang bisa digunakan:
+•   cron 
+    Digunakan untuk menjalankan job secara otomatis berdasarkan ekspresi cron yang sudah ditetapkan.
+
+•   pollSCM
+    Menggunakan ekpresi cron yang secara otomatis mengecek perubahan di SCM. Jika terjadi perubahan, maka secara otomatis job akan berjalan.
+
+•   upstream
+    Digunakan untuk menjalankan job, setelah job lain selesai dengan result https://javadoc.jenkins-ci.org/hudson/model/Result.html 
+
+##Kode : Trigger 
+vim Jenkinksfile
+
+pipeline{
+    agent none
+    environment{
+        AUTHOR = "Rapli Maulana Aji"
+    }
+    triggers{
+        cron("*/5 * * * *")                                                                         #pipeline berjalan setiap 5 menit
+        pollSCM("*/5 * * * *")
+        upstream(upstreamProjects: "job1,job2", threshold: hudson.model.Result.SUCCESS)
+    }
+    stages{
+        stage("Prepare"){
+            agent{
+                node{
+                    label "linux && java11"
+                }
+            }
+            steps{
+                echo("Author : ${AUTHOR}")
+            }
+        }
+    }
+}

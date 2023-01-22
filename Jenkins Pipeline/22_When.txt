@@ -1,0 +1,28 @@
+### WHEN ###
+
+When adalah perintah yang digunakan untuk menentukan pada kondisi apa sebuah stage di eksekusi.
+When memiliki detail kondisi yang sangat beragam https://www.jenkins.io/doc/book/pipeline/syntax/#when 
+
+##Kode : When
+vim Jenkinsfile
+
+pipeline{
+    agent none
+    stages{
+        stage("Release"){
+            when{
+                expression{
+                    return params.DEPLOY            #jika user menginputkan parameter DEPLOY = true, maka stage Release ajan dijalankan. Jika DEPLOY = false, stage Release tidak akan dijalankan
+                }
+            }
+            agent{
+                node{
+                    label "linux && java11"
+                }
+            }
+            steps{
+                echo "Release it"
+            }
+        }
+    }
+}

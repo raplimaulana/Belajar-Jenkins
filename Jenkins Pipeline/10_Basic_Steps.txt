@@ -1,0 +1,25 @@
+### BASIC STEPS ###
+
+Saat kita menginstall Pipeline Plugin, secara default otomatis menginstall Pipeline Basic Steps plugin, yang mengandung perintah atau instruksi step yang bisa kita gunakan https://plugins.jenkins.io/workflow-basic-steps/ 
+Sebelumnya kita sudah menggunakan perintah echo untuk menampilkan tulisan.
+Masih banyak perintah lainnya, kita bisa melihat daftar perintah yang tersedia pada link berikut https://www.jenkins.io/doc/pipeline/steps/workflow-basic-steps/ 
+
+##Kode : Basic Steps
+vim Jenkinsfile
+
+pipeline{
+    agent{
+        node{
+            label "linux && java11"
+        }
+    }
+    stages{
+        stage("Build"){
+            steps{
+                echo "Build 1"
+                sleep(0)
+                echo "Build 2"
+            }
+        }
+    }
+}

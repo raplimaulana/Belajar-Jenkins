@@ -1,0 +1,7 @@
+### PIPELINE LIMITATION ###
+
+Pipeline di Jenkins sebenarnya dijalankan dalam sebuah Groovy Function.
+Sayangnya, ada maksimal baris yang diperbolehkan pada Groovy Function.
+Oleh karena itu, tidak disarankan kita membuat pipeline yang sangat panjang dalam satu file.
+Oleh karena itu ada baiknya kita perlu membuat yang namanya Jenkins Shared Library, yaitu fitur dimana kita bisa membuat library untuk pipeline, sehingga bisa digunakan ulang, atau dipisah-pisahkan kode pipeline nya.
+Materi Jenkins Shared Library akan kita bahas dikelas selanjutnya https://issues.jenkins.io/browse/JENKINS-37984 

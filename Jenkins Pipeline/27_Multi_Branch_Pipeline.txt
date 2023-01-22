@@ -1,0 +1,28 @@
+### MULTI BRANCH PIPELINE ###
+
+Sebelumnya kita hanya membuat Job dari repository Git dengan branch yang sudah kita tentukan.
+Pada kenyataannya, hanya menggunakan satu branch tidaklah terlalu bermanfaat, kita ingin secara otomatis proses Job berjalan di semua branch di repository Git.
+Jenkins Pipeline memiliki fitur Multi Branch Pipeline, dimana bisa secara otomatis mendeteksi branch yang terdapat di Git.
+Oleh karena itu jika terdapat branch baru, kita tidak perlu menambah Job secara manual, begitu pula jika menghapus branch, kita tidak perlu menghapus Job secara manual.
+Khusus Multi Branch Pipeline, hanya bisa membuat pipeline dari Jenkinsfile, tidak bisa langsung di Job nya.
+
+
+
+
+##Membuat Multi Branch Pipeline
+Akses jenkins via browser > Dashboard > New Item > Beri nama Job baru > klik 'Multibranch Pipeline' > OK > Pada bagian 'Build Configuration', modenya hanya bisa 'by Jenkinsfile' > 
+Pada bagian 'Branch Sources', pilih 'Add source' > Pilih 'Git' > Masukan link Github ke bagian 'Project Repository' > Pilih credential yang memiliki akses ke akun Github > 
+Pada bagian 'Scan Multibranch Pipeline Triggers', centang 'Periodically if not otherwise run' agar selalu melakukan scanning apabila ada branch baru atau branch yang dihapus, sehingga branch selalu up-to-date >
+Pilih waktu scanning yang akan dilakukan oleh Jenkins, misal setiap 1 menit > Masukan lokasi file Jenkinsfile disimpan > Save > Build Now 
+
+Tugas:
+1. Tugas 1
+   - Tambahkan beberapa branch baru.
+   - Lalu jalankan scan ulang multi branch pipeline.
+
+2. Tugas 2
+  - Hapus beberapa branch
+  - Lalu jalankan scan ulang multi branch pipeline
+
+
+

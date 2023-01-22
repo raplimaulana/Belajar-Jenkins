@@ -1,0 +1,5 @@
+### PENGENALAN JENKINS ###
+Jenkins adalah Open Source Automation Server yang paling populer saat ini.
+Jenkins sendiri merupakan sebuah platform untuk Automation Server.
+Kebanyakan fitur di Jenkins sendiri tersedia dalam bentuk plugin, bahkan kita bisa membuat plugin sendiri jika kita mau https://plugins.jenkins.io/
+

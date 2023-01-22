@@ -1,0 +1,40 @@
+### PARALLEL ###
+
+Pada kasus tertentu, kadang kita ingin stages berjalan secara parallel.
+Secara default parallel akan menunggu semua proses selesai, walaupun ada salah satu stage yang error.
+Namun jika kita ingin otomatis menghentikan semua proses stage ketika ada error di salah satu stage, kita bisa menambahkan perintah failFast, atau menambahkan parallelAlwaysFailFast() di option.
+Saat menggunakan parallel, kita tidak bisa menambahkan agent di stage atasnya, oleh karena itu kita perlu tentukan di tiap stage parallel nya.
+
+##Kode : Parallel
+vim Jenkinsfile
+
+pipeline{
+    agent none
+    stages{
+        stage("Preparation"){
+            failFast true
+            parallel{
+                stage("Prepare Java"){
+                    agent{
+                        node{
+                            label "linux && java11"
+                        }
+                    }
+                    steps{
+                        echo "Prepare Java"
+                    }
+                }
+                stage("Prepare Maven"){
+                    agent{
+                        node{
+                            label "linux && java11"
+                        }
+                    }
+                    steps{
+                        echo "Prepare Maven"
+                    }
+                }
+            }
+        }
+    }
+}

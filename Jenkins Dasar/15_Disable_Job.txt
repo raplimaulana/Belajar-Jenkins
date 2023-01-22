@@ -1,0 +1,11 @@
+### DISABLE JOB ###
+
+Saat kita tidak butuh Job lagi, ada dua hal yang bisa kita lakukan.
+•   Menghapus Job. 
+    Artinya Job dan semua konfigurasi akan hilang secara permanen.
+
+•   Men-disabled Job. 
+    Artinya Job tidak akan aktif, namun konfigurasi dan Job tetap ada, dan kita bisa mengaktifkan nya lagi jika kita mau.
+
+##melakukan disable Job
+Dashboard > Pilih Job yang akan digunakan > Configure > General > Ubah 'Enable' menjadi 'Disable' > Save

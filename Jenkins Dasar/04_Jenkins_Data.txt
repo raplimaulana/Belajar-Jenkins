@@ -1,0 +1,7 @@
+### JENKINS DATA ###
+
+Jenkins tidak membutuhkan database untuk menyimpan seluruh konfigurasi dan datanya.
+Jenkins akan secara otomatis membuat folder .jenkins di home directory sistem operasi kita.
+Di folder tersebut lah, Jenkins akan menyimpan seluruh datanya.
+Jika kita menghapus folder .jenkins, secara otomatis kita akan menghapus seluruh data Jenkins.
+

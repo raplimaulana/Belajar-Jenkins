@@ -1,0 +1,40 @@
+### AGENT PER STAGE ###
+
+Sebelumnya kita sudah menggunakan Agent untuk menentukan tempat menjalankan pipeline.
+Saat kita menggunakan Agent, secara otomatis semua Stage akan jalan di Agent tersebut.
+Tapi kadang ada kalanya kita ingin menjalankan Stage di agent yang berbeda.
+Contoh kasus misal pada Stage Pertama kita butuh Agent Java, selanjutnya pada Agent Kedua kita butuh Agent GoLang, dan lain-lain.
+Pada kasus ini, kita bisa jadikan Agent di pipeline menjadi none, lalu tambahkan Agent di tiap Stage.
+
+##Kode : Agent per Stage
+vim Jenkinsfile
+
+pipeline{
+    agent none
+    stages{
+        stage("Build"){
+            agent{
+                node{
+                    label "linux && java11"
+                }
+            }
+            steps{
+                script{
+                    for (int i=0; i<10; i++){
+
+                    }
+                }
+            }
+        }
+        stage("Test"){
+            agent{
+                node{
+                    label "windows"
+                }
+            }
+            steps{
+                echo("Hello Test")
+            }
+        }
+    }
+}

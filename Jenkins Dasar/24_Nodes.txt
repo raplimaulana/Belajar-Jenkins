@@ -1,0 +1,40 @@
+### NODES ###
+
+Saat kita menggunakan Jenkins, rekomendasinya sebenarnya tidak menjalankan Jenkins single Node, apalagi jika Job nya sudah sangat banyak.
+Jenkins mendukung Nodes atau Agent, dimana kita bisa menambahkan Node Jenkins lainnya sehingga bisa digunakan untuk menjalankan Job.
+Dengan menambahkan Node Jenkins, kita tidak perlu melakukan setup Job secara manual satu persatu di semua Node Jenkins, karena secara otomatis Jenkins akan mendistribusikan eksekusi Job nya ke semua Node.
+
+##menambah Node baru (syaratnya VM-nya sudah dibuat terlebih dahulu) 
+Dashboard > Manage Jenkins -> Manage Nodes and Clouds -> New Node
+
+
+
+SSH Build Agent
+
+Saat kita menambah Node, terdapat banyak pilihan untuk terkoneksi dari Node master ke Node agent.
+Salah satu yang aman adalah menggunakan SSH, namun secara default plugin nya tidak terinstall.
+Jadi kita perlu menginstall plugin SSH Build Agent https://plugins.jenkins.io/ssh-slaves/ 
+
+#menginstall SSH Build Agent
+Dashboard > Manage Jenkins > Manage Plugins > Available plugins > search 'ssh build' > Pilih 'SSH Build Agents' > Download now and install after restart >
+Centang 'Restart Jenkins....' agar langsung di restart 
+
+#menginstall Software Requirements pada VM baru
+Install git dan java 11 pada VM baru.
+   
+sudo apt-get install git
+sudo apt install openjdk-11-jdk-headless
+
+#cek lokasi home directory VM
+pwd
+
+/home/ubuntu
+
+#menambah Node baru
+Dashboard > Manage Jenkins > Manage Nodes and Clouds > New Node > isi 'Number of executor' > Pada bagian 'Remote root directoy', isi dengan lokasi home directory VM dan buat 1 folder baru. Misal /home/ubuntu/jenkins-agent01 > Pada bagian 'Launch method', pilih 'Launch agent via SSH' > 
+Tambahkan IP VM pada bagian 'Host' > Tambahkan credential > Pada bagian 'Host Key Verification Strategy', pilih 'Non verifyng Verification Strategy', karena kita anggap belum verifikasi dulu diawal, sehingga verifikasi hostnya (SSH location) harus diverifikasi secara manual >
+
+*jika muncul error "jenkins ERROR: Server rejected the 1 private key(s) for root (credentialId:jenkins-agent-01/method:publickey)..."
+ https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/client-and-managed-masters/how-to-connect-to-remote-ssh-agents
+
+ 

@@ -1,0 +1,15 @@
+### BUILD EXECUTOR ###
+
+Jenkins menjalankan semua Job dalam Executor.
+Secara default Jenkins memiliki 2 Executor yang digunakan untuk menjalankan Job.
+Saat semua Executor sedang sibuk, maka Job yang akan dijalankan harus menunggu terlebih dahulu sampai Executor ada yang tidak sibuk.
+Harap bijak menentukan jumlah Executor, karena semakin banyak proses Job yang berjalan secara paralel, semakin banyak pula resource CPU dan Memory yang akan dibutuhkan.
+
+##check Build Executor yang berjalan
+Dashboard > Build Executor Status
+
+
+
+##mengubah jumlah Build Executor 
+Dashboard > Manage Jenkins > Configure Jenkins > # of Executor > Masukan jumlah Executor yang ingin digunakan oleh Jenkins > Save
+

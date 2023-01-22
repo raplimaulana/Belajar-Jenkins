@@ -1,0 +1,4 @@
+Pipeline Plugin
+Pipeline script
+Pipeline: Stage View
+Credentials Bindings

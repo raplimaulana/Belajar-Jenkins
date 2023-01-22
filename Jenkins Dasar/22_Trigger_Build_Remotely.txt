@@ -1,0 +1,18 @@
+### TRIGGER BUILD REMOTELY ###
+
+Jenkins memiliki fitur dimana kita bisa meminta Jenkins untuk menjalankan Job secara Remote.
+Remote dalam artinya tanpa harus membuka web Jenkins.
+Fitur ini cocok sekali ketika misal kita membuat Bot, sehingga Bot tersebut bisa memerintah Jenkins untuk menjalankan Job yang kita minta.
+Saat kita menggunakan fitur ini, kita perlu menggunakan Authentication Token, yaitu token yang perlu kita gunakan ketika kita akan menjalankan Job secara Remote.
+
+##membuat Trigger Build Remotely
+Dashboard > Pilih Job yang akan digunakan > Configure > Build Triggers > Centang 'Trigger builds remotely' > Masukan Token (password yang akan digunakan nanti) > Save
+
+##menggunakan Trigger Build Location
+Dashboard > Pilih Job yang akan digunakan > Configure > Build Triggers > Pada bagian 'Trigger builds remotely', gunakan URL tersebut untuk membuka Job tanpa Login
+
+*Misal tertulis JENKINS_URL/job/Belajar%20Build%20Remote/build?token=TOKEN_NAME atau /buildWithParameters?token=TOKEN_NAME
+ Linknya akan menjadi seperti ini, http://ec2-3-86-205-87.compute-1.amazonaws.com:8080/job/Belajar%20Build%20Remote/build?token=rapli123
+
+*Pada saat mengakses link tersebut via browser, kita tidak dapat melihat apa-apa, namun secara otomatis Jobnya akan dijalankan
+

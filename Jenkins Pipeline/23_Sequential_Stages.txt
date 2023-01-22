@@ -1,0 +1,35 @@
+### SEQUENTIAL STAGES ###
+
+Stages bisa memiliki stage lagi di dalam nya.
+Dan stage di dalamnya secara default akan dieksekusi secara sequential berurut.
+Stages itu di dalamnya hanya bisa memiliki satu perintah, misal steps (seperti yang sering kita lakukan), stages, paralel atau matrix.
+Jadi jika kita tambahkan stages lagi, maka tidak bisa digabung dengan steps misalnya.
+
+##Kode : Sequential Stages
+vim Jenkinsfile
+
+pipeline{
+    agent none
+    stages{
+        stage("Preparation"){
+            agent{
+                node{
+                    label "linux && java11"
+                }
+            }
+            stages{
+                stage("Prepare Java"){
+                    steps{
+                        echo "Prepare Java"
+                    }
+                }
+                stage("Prepare Maven"){
+                    steps{
+                        echo "Prepare Maven"
+                    }
+                }
+            }
+        }
+    }
+}
+

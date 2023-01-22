@@ -1,0 +1,9 @@
+### POLL SCM ###
+
+Saat menggunakan Scheduled Job menggunakan Cron, Job akan selalu di eksekusi ketika sudah waktunya sesuai dengan waktu Cron.
+Kadang, ada kasus dimana kita ingin membuat Scheduled Job, namun hanya ingin menjalankan Job, ketika terjadi perubahan di Source Code saja.
+Pada kasus ini, kita bisa menggunakan Poll SCM.
+Poll SCM mirip dengan Scheduled Job, namun hanya akan menjalankan Job nya, ketika terjadi perubahan di Source Code, jika tidak ada perubahan, maka Job tidak akan dijalankan.
+
+##melakukan Poll SCM
+Dashboard > Pilih Job yang akan digunakan > Configure > Build Triggers > Centang 'Poll SCM' > Masukan informasi scheduled Cron > Save

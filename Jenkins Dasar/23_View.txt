@@ -1,0 +1,7 @@
+### VIEW ###
+
+Saat Job sudah banyak, kadang kita ingin membuat grup yang berisikan kumpulan Job tertentu, di Jenkins fitur ini disebut View.
+Kita bisa membuat View dari menu (+) yang terdapat di halaman Dashboard, lalu bisa memilih Job mana yang ingin kita tambahkan ke View tersebut.
+
+##membuat View
+Dashboard > + > ....

@@ -1,0 +1,65 @@
+### POST ###
+
+Post merupakan bagian yang digunakan untuk menambah steps di akhir ketika sebuah kondisi pipeline terpenuhi.
+Contoh setelah pipeline selesai dibuat, kita ingin mengirim pesan notifikasi ke Slack / Email. 
+Atau jika terjadi error di pipeline, kita ingin mengirim notifikasi ke Slack.
+
+Condition
+
+Ada banyak sekali kondisi di Post yang bisa kita gunakan:
+•   always 
+    Artinya kondisi apapun, akan selalu dilakukan.
+
+•   changed 
+    Jika status pipeline berubah dari sebelumnya, misal sebelumnya error, sekarang sukses.
+
+•   fixed
+    Jika status pipeline berubah dari sebelumnya error, menjadi sukses.
+
+•   regression
+    Jika status pipeline sebelumnya sukses, lalu menjadi tidak sukses.
+
+•   aborted
+    Jika pipeline dibatalkan secara manual.
+
+•   failure 
+    Jika status pipeline error.
+
+•   success
+    Jika status pipeline sukses.
+
+•   cleanup
+    Selalu dijalankan, namun setelah kondisi post lainnya.
+
+
+##Kode: Post
+vim Jenkinsfile
+
+pipeline{
+    agent{
+        node{
+            label "linux && java11"
+        }
+    }
+    stages{
+        stage("Hello"){
+            steps{
+                echo("Hello Pipeline")
+            }
+        }
+    }
+    post{
+        always{
+            echo "I will always say Hello again!"
+        }
+        success{
+            echo "Yey, Success"
+        }
+        failure{
+            echo "Oh no, failure"
+        }
+        cleanup{
+            echo "Dont care success or error"
+        }
+    }
+}

@@ -1,0 +1,7 @@
+### MEMBUAT JOB ###
+Job adalah sebutan untuk tugas automation di Jenkins.
+Saat kita menginstall Jenkins, tidak ada satupun Job sama sekali.
+Kita bisa membuat Job di Jenkins menggunakan web Jenkins.
+
+##membuat Job
+Akses jenkins via browser > Dashboard > New Item > Beri nama Job baru > klik 'Freestyle Project' > OK > Save > Build Now 

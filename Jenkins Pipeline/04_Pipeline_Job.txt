@@ -1,0 +1,17 @@
+### PIPELINE JOB ###
+
+##Membuat Pipeline Job
+Akses Jenkins via browser > Dashboard > New > Pipeline > OK > Scroll ke bawah ke bagian 'Pipeline' > Pilih 'Pipeline script', jika ingin menulis kode secara langsung. Pilih 'Pipeline script SKM', jika ingin menulis kode menggunakan Github, dll. > 
+Masukan kode pipeline di bagian 'Script' > Save > Build Now
+
+##Kode: Pipeline
+pipeline{
+    agent any
+    stages{
+        stage("Hello"){
+            steps{
+                echo "Hello World"                #dalam bahasa pemrograman groovy, tanda dalam kurung hanya opsional saja 
+            }
+        }
+    }
+}

@@ -1,0 +1,12 @@
+### DISCARD OLD BUILT ###
+
+Jenkins menyimpan semua history build di folder .jenkins di HOME directory.
+Secara default, Jenkins akan menyimpan semua history Job selamanya, hal ini tidak baik terutama jika sampai kita lupa, maka server Jenkins bisa kehabisan ruang penyimpanan.
+Jenkins memiliki fitur penghapusan riwayat build yang lama secara otomatis, baik itu menggunakan hari atau jumlah build.
+Ketika kita menambahkan aturan ini, secara otomatis Jenkins akan melakukan pengecekan ketika selesai menjalankan Job.
+
+Dashboard > Pilih Job yang akan digunakan > Configure > General > Centang 'Discard old builds' > 
+'Days to keep builds' diisi '1', artinya history build Job akan disimpan 1 hari saja, setelah itu akan otomatis dihapus dan hanya akan tersisa sesuai dengan input 'Max # of builds to keep' yang dimasukan > 
+'Max # of builds to keep' diisi '10', artinya berapa history Job yang boleh disimpan sesuai dengan waktu yang dtentukan pada 'Days to keep builds' > save > Build Now
+
+*harus di build terlebih dahulu agar fitur Discard Old build dapat dijalankan

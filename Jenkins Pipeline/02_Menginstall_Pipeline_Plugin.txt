@@ -1,0 +1,9 @@
+### MENGINSTALL PIPELINE JENKINS ###
+
+Saat kita menginstall Jenkins, secara default tidak terdapat Jenkins Pipeline.
+Kita perlu menginstall Plugin Pipeline terlebih dahulu https://plugins.jenkins.io/workflow-aggregator/ 
+
+
+##menginstal Pipeline Jenkins
+Dashboard > Manage Jenkins > Manage Plugins > Available plugins > search 'pipeline' > Pilih 'Pipline' > Download now and install after restart >
+Centang 'Restart Jenkins....' agar langsung di restart 

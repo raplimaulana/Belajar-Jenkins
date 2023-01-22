@@ -1,0 +1,25 @@
+### BUILD PARAMETER ###
+
+Saat membuat Job, kadang ada kasus dimana kita ingin meminta input data dari user sebelum menjalankan Job tersebut.
+Misal ketika kita ingin menjalankan Job untuk deploy aplikasi, kita bisa meminta input dari user ingin di deploy kemana misalnya.
+Jenkins memiliki fitur Build Parameter, dimana kita bisa meminta input data dari user sebelum menjalankan Job nya.
+Terdapat banyak sekali jenis input data, seperti boolean, string, choice, secret, dan lain-lain.
+Semua input data yang diberikan oleh user, secara otomatis bisa kita ambil seperti environment variable di Build Step.
+
+##menambah Build Parameter
+
+Dashboard > Pilih Job yang akan digunakan > Configure > General > Centang 'This project is parameterised' > Add Parameter > Pilih jenis input data yang akan digunakan, misal 'Choice Parameter' >
+Isi bagian 'name' dengan 'SCRIPT' > Masukan choice yang boleh dipilih oleh user. Misal clean, compile, test, dan packages > 
+
+*jika ingin menggunakan build step sekalian, silahkan tambahkan langkah menggunakan Build Parameter (masih di configure)
+
+##menggunakan Build Parameter
+Dashboard > Pilih Job yang akan digunakan > Configure > Build Steps > Add build step > execute shell > Isi dengan perintah, ./mvnw ${SCRIPT}; > Save > Build Now  
+
+##menjalankan Build Parameter
+Sekarang menu 'Build Now' akan secara otomatis berganti nama menjadi 'Build with Parameters'
+
+Dashboard > Pilih Job yang akan digunakan > Pilih Parameter sesuai input yang ditanyakan > Build
+
+
+

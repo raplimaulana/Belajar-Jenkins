@@ -1,0 +1,14 @@
+### GLOBAL ENVIRONMENT VARIABLE ###
+
+Selain menggunakan env variable yang disediakan oleh Jenkins, kita juga bisa menambahkan environment variable tambahan ke Jenkins.
+Environment variable yang kita tambahkan secara otomatis akan teregistrasi secara global, dan bisa digunakan di semua Job.
+Fitur ini sangat cocok ketika kita butuh data konfigurasi yang bisa diubah-ubah, tanpa harus mengubah Build Step setiap Job yang kita buat.
+Untuk menambahkan environment variable, kita bisa menggunakan menu Manage Jenkins -> Configure System -> Global Properties -> Environment Variables.
+
+##menambahkan environment variable
+Dashboard > Manage Jenkins > Configure System > Scroll ke bawah hingga 'Global Properties' > Centang 'Environment Variables' > Add > 
+Misal menambahkan environment variable 'APP_AUTHOR' dengan value 'Rapli Maulana Aji' > Save  
+
+##menggunakan environment variable
+Dashboard > Pilih Job yang akan digunakan > Configure > Build Steps > Add build step > execute shell > Isi dengan perintah, echo "Build App by ${APP_AUTHOR}"; > Save > Build Now  
+

@@ -1,0 +1,113 @@
+### ENVIRONMENT ###
+
+Pipeline juga mendukung penambahan environment variable.
+Jika environment variable ditambahkan di pipeline, maka semua stages bisa mendapatkan nilainya.
+Jika environment variable ditambahkan di stage, maka hanya bisa didapatkan di stage tersebut.
+
+##Kode : Environment
+
+vim Jenkinsfile
+
+pipeline{
+    agent none
+    environment{
+        AUTHOR = "Rapli Maulana Aji"
+    }
+    stages{
+        stage("Prepare){
+            agent{
+                node{
+                    label "linux && java11"
+                }
+            }
+            specs{
+                echo("Author : ${AUTHOR}")
+                echo("Email : ${EMAIL}")
+                echo("Start Job : ${env.JOB_NAME}")
+                echo("Start Build : ${env.BUILD_NUMBER}")
+                echo("Branch Name : ${env.BRANCH_NAME}")
+            }
+        }
+    }
+}
+
+
+
+### CREDENTIALS ###
+Di Environment, terdapat perintah khusus bernama credentials(), yang bisa digunakan untuk mengambil data dari Jenkins Credentials.
+Hal ini lebih aman, dibanding harus diketik manual di Jenkinsfile.
+Tidak semua jenis Credentials didukung, hanya beberapa saja yang bisa digunakan menggunakan perintah credentials()
+
+Credentials Type:
+•   Secret Text
+    Secara otomatis environment variable berisi value dari secret text.
+
+•   Secret File
+    Secara otomatis environment variable berisi lokasi file secret yang secara temporary dibuat dan dihapus otomatis setelah pipeline selesai.
+
+•   Username and Password
+    Secara otomatis environment variable berisi data username:password, dan secara otomatis akan dibuatkan environment variable dengan nama NAMA_USR dan NAMA_PSW.
+
+•   SSH with Private Key
+    Secara otomatis environment variable berisi lokasi file SSH yang secara temporary dibuat dan dihapus otomatis. Dan juga secara otomatis akan dibuatkan environment variable NAMA_USR dan NAMA_PSW (berisi passphrase SSH).
+
+##Menambah Credential
+Dashboard > Manage Jenkins > Manage Credentials > Stores scoped to Jenkins > (global) > Add Credentials > kind 'Username with password >
+Scope 'global' agar siapaun bisa pake > Isi bagian 'ID' dengan nama username yang akan dipakai > isi username pada bagian 'Username' > Create
+
+##Kode : Environment Credentials
+vim Jenkinsfile
+
+pipeline{
+    agent none
+    stages{
+        stage("Prepare"){
+            environment{
+                APP = credentials("maulana_rahasia")                 #mengambil data pada credential dengan ID 'maulana_rahasia'. Secara otomatis username akan menjadi APP_USR dan password menjadi APP_PSW
+            }
+            agent{
+                node{
+                    label "linux && java11"
+                }
+            }
+            steps{
+                echo("App User : ${APP_USR}")
+                echo("App Password : ${APP_PSW}")
+                echo("Start Job : ${env.JOB_NAME}")
+                echo("Start Build : ${env.BUILD_NUMBER}")
+                echo("Branch Name : ${env.BRANCH_NAME}")
+            }
+        }
+    }
+}
+
+##Sensitive Information
+Perintah ${KEY} didalam “” adalah Groovy String Interpolation, dan itu seharusnya tidak digunakan untuk data sensitive, misal credentials.
+Agar informasi sensitive tidak terlihat, namun bisa dieksekusi, gunakan tanda ‘’ (petik satu), dan gunakan $KEY
+
+#Kode : Environment Credentials
+vim Jenkinsfile
+
+pipeline{
+    agent none
+    stages{
+        stage("Prepare"){
+            environment{
+                APP = credentials("maulana_rahasia")                 #mengambil data pada credential dengan ID 'maulana_rahasia'. Secara otomatis username akan menjadi APP_USR dan password menjadi APP_PSW
+            }
+            agent{
+                node{
+                    label "linux && java11"
+                }
+            }
+            steps{
+                sh('echo "App Password : $APP_PSW" > "rahasia.txt"')
+                echo('APP Password: $APP_PSW')
+                echo("Start Job : ${env.JOB_NAME}")
+                echo("Start Build : ${env.BUILD_NUMBER}")
+                echo("Branch Name : ${env.BRANCH_NAME}")
+            }
+        }
+    }
+}
+

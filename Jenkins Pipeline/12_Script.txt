@@ -1,0 +1,38 @@
+### SCRIPT ###
+
+Kadang, ada kalanya kita butuh membuat pipeline yang sangat flexible.
+Pipeline mendukung script, dimana dengan script, kita bisa menyisipkan kode Groovy pada pipeline tersebut.
+Secara default, jika kita menggunakan kode Groovy di dalam steps, maka akan terjadi error.
+Kita harus tambahkan tag script untuk menandai bahwa bagian ini ada kode Groovy https://groovy-lang.org/ 
+
+*Rekomendasi:
+ - Pelajari dasar-dasar pemrograman Groovy
+ - Pelajari tipe data, operator dan function/method
+ - Tidak harus sampai belajar Pemrograman Berorientasi Object
+
+##Kode : Script
+vim Jenkinsfile
+
+pipeline{
+    agent{
+        node{
+            label "linux && java11"
+        }
+    }
+    stages{
+        stage("Build"){
+            steps{
+                script{
+                    for (int i=0; i<10; i++){
+                        echo("Script ${i}")
+                    }
+                }
+                echo("Start Build")
+                sh("./mvnw clean compile test-compile")
+                echo("Finish Build")
+            }
+        }
+    }
+}
+
+

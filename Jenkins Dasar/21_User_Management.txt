@@ -1,0 +1,49 @@
+### USER MANAGEMENT ###
+
+Saat pertama kita menginstall Jenkins, kita telah membuat User untuk login ke web Jenkins.
+Kita bisa menambah user lainnya secara manual menggunakan Jenkins.
+
+##membuat user baru
+Dashboard > Manage Jenkins > Manage Users > Create User
+
+
+
+Anonymous Read Only
+
+Secara default, hanya user yang sudah login yang bisa melihat semua Job di Jenkins.
+Pada kasus misal ketika kita menggunakan Jenkins untuk project Open Source, ada baiknya kita membolehkan akses untuk Read Only ke Guest User.
+
+##mengaktifkan fitur Anonymous Read Only
+Dashboard > Manage Jenkins > Configure Global Security > Authentication > Pada bagian 'Authorization', dipilih 'Logged-in users can do anything' > Centang 'Allow Anonymous Read Access' > Save
+
+
+
+Role Based Authorization Strategy
+
+Secara default, saat kita membuat user di Jenkins, user tersebut bisa melakukan apapun layaknya admin user.
+Kadang kita ingin membatasi akses untuk user, sayangnya secara default di Jenkins kita tidak bisa melakukan ini.
+Namun terdapat plugin Role Based Authorization Strategy yang bisa kita gunakan dalam kasus ini https://plugins.jenkins.io/role-strategy/ 
+
+##Membuat Role Based Authorization 
+#menginstall Role-based Authorization Strategy
+Dashboard > Manage Jenkins > Manage Plugins > Available plugins > search 'role-based' > Pilih 'Role-based Authorization' > Download now and install after restart >
+Centang 'Restart Jenkins....' agar langsung di restart 
+
+*secara otomatis akan terdapat tambahan pilihan 'Roled-based Strategy' pada bagian 'Authorization' Configure Global Security
+
+#mengubah Authorization 
+Dashboard > Manage Jenkins > Configure Global Security > Authentication > Pad bagian 'Authorization', dipilih 'Roled-based Strategy' > Save
+
+*secara otomatis akan terdapat menu baru bernama 'Manage and Assign Roles' pada 'Manage Jenkins'
+
+#Manage and Assign Roles
+Dashboard > Manage Jenkins > Manage and Assign Roles > Manage Roles > 
+https://medium.com/@auasad/jenkins-role-based-authorization-strategy-8a194c76ac35
+https://www.toolsqa.com/jenkins/jenkins-user-management/
+
+*User Management Lainnya:
+ - https://plugins.jenkins.io/saml/ 
+ - https://plugins.jenkins.io/google-login/ 
+ - https://plugins.jenkins.io/github-oauth/ 
+ - https://plugins.jenkins.io/gitlab-oauth/
+ - Dan lain-lain https://plugins.jenkins.io/ui/search/?labels=user  

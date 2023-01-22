@@ -1,0 +1,30 @@
+### OPTION ###
+
+Pipeline memiliki perintah option yang digunakan untuk pengaturan pipeline, ada di level pipeline atau di level stage (seperti environment).
+Ada banyak sekali option yang bisa kita atur https://www.jenkins.io/doc/book/pipeline/syntax/#options 
+
+##Kode : Option
+vim Jenkinsfile
+
+pipeline{
+    agent none
+    envronment{
+        AUTHOR = "Rapli Maulana Aji"
+    }
+    options{
+        disableConcurrentBuilds()                                 #menonaktifkan running paralel pipeline, pipeline hanya brjalan satu saja dan bergantian (tidak bisa melakukan running pipelie secara bersamaan)
+        timeout(time: 10, unit: 'MINUTES')                        #jika pipeline berjalan lebih dari 10 menit, maka pipeline tersebut akan di abort (dibatalkan)
+    }
+    stages{
+        stage("Prepare"){
+            agent{
+                node{
+                    label "linux && java11"
+                }
+            }
+            steps{
+                echo("Author : ${AUTHOR}")
+            }
+        }
+    }
+}

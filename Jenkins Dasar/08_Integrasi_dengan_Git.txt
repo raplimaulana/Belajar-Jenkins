@@ -1,0 +1,12 @@
+### INTEGRASI DENGAN GIT ###
+
+Setelah kita setup Git dengan Github, dan juga menambahkan Credential SSH ke Jenkins, sekarang kita bisa mulai integrasi Jenkins dengan Git di Github.
+Namun sebelumnya, yang perlu kita lakukan adalah, pastikan memiliki project di Github yang bisa digunakan sebagai sumber kode untuk Jenkins Job yang sudah kita buat.
+
+##Konfigurasi Git di Job
+Menambahkan project Github yang akan digunakan ke Jenkins untuk dilakukan otomasi.
+Dashboard > Pilih Job yang akan digunakan > Configure > Pada 'Source Code Management' pilih 'git' > Masukan Repository Git Repositori, contoh https://github.com/raplimaulana/belajar-spring-dasar.git >
+Ganti branch sesuai branch yang digunakan pada Git, misal branch main > Save > Build Now > Secara otomatis akan melakukan clonning dan disimpan pada menu 'Workspace' di job. 
+
+
+

@@ -1,0 +1,13 @@
+### PENGENALAN JENKINS PIPELINE ###
+
+Jenkins Pipeline merupakan plugin yang mendukung implementasi pembuatan continuous delivery pipeline di Jenkins.
+Sebelumnya kita membuat Job menggunakan GUI melalui Website, sekarang kita akan membuat Job menggunakan pipeline.
+Continuous delivery pipeline adalah perintah-perintah yang dibuat agar software yang kita buat bisa di deliver ke pengguna, dari mulai version control sampai deployment.
+Pipeline menyediakan peralatan untuk mempermudah prose tersebut, dari yang paling sederhana sampai yang kompleks, menggunakan sintaks DSL (Domain Specific Language).
+Jenkins Pipeline menggunakan bahasa pemrograman Groovy sebagai DSL nya, namun jangan khawatir, karena penggunaannya sangat mudah.
+
+Kenapa Pipeline?
+
+Karena pipeline dibuat menggunakan kode, maka kita bisa dengan mudah mengubah atau me-review tahapan pipeline.
+Karena pipeline biasanya dibuat dalam file dan disimpan di projectnya, maka kita tidak perlu takut hilang ketika terjadi restart atau kerusakan di Jenkins nya.
+Kita bisa memasukkan logic yang sederhana sampai kompleks di Pipeline, seperti pengecekan kondisi, perulangan, dan lain-lain.

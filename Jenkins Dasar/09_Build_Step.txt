@@ -1,0 +1,11 @@
+### BUILD STEP ###
+Source Code Management menggunakan Git, hanyalah awal dari tahapan Job, biasanya Job itu akan menjalankan perintah-perintah yang diperlukan, atau dalam Jenkins dinamakan Build Step.
+Pada saat menambahkan Job/Project, Jenkins tidak akan menjalankan perintah apapun. Jika ingin melakukan suatu perintah pada saat pertama kali melakukan Build, kita dapat melakukannya menggunakan Build Step.
+#Kita perlu memberi tahu Jenkins untuk menjalankan perintah ketika melakukan Build Job apa menggunakan Build Step.
+Di Jenkins, kita bisa melakukan konfigurasi Job untuk menambahkan Build Step yang kita mau, bisa lebih dari satu.
+
+##menjalankan Build Step
+Dashboard > Pilih Job yang akan dijalankan > Configure > Build Step > Add build step > Jika menggunakan linux gunakan 'Execute shell' sedangkan jika menggunakan windows gunakan 'Execute Windows batch command' >
+Masukan perintah yang digunakan untuk melakukan build project kita. (contoh "./mvnw clean", "./mvnw compile test-compile" dan "./mvnw test" > Save > Build Now  
+?
+

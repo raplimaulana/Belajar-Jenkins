@@ -1,0 +1,34 @@
+### POST BUILD ACTION ###
+
+Jenkins memiliki fitur bernama Post Build Action.
+Fitur ini biasanya digunakan untuk memberitahu status sebuah Job ketika proses build selesai.
+Misal, setelah sebuah Job selesai, kita ingin mengirim statusnya ke Email, Chat atau yang lainnya.
+Contohnya, misal kita ingin mengirim status Job ke Slack, salah satu platform untuk Chat yang lumayan populer di dunia kerja.
+
+
+
+Mnambahkan Slack Notification pada Jenkins.
+1. Menambahkan Slack Notification Plugin melalui browser.
+   
+   Dashboard > Manage Jenkins > Manage Plugins > Available plugins > search 'Slack' > Pilih 'Slack Notification' > Download now and install after restart
+   Ceklis 'Restart Jenkins....' agar langsung di restart
+
+   *jika error 'HTTP ERROR 403 No Valid ...', aktifkan terlebih dahulu CSRF Protection
+    Dashboard > Manage Jenkins > Configure Global Security > pada bagian 'CSRF Protection' ceklis 'Enable proxy compatibility' > Save
+
+2. Setup Slack Jenkins Integration
+
+   Buka link berikut https://my.slack.com/services/new/jenkins-ci > create a new channel > beri nama 'jenkins-notification' dan deskripsi 'Jenkins Notification' > Add Jenkins CI integeration >
+   Copy private key pada bagian 'Integration Token Credential ID' di 'Step 3' untuk ditambahkan ke credential Jenkins > Akses jenkins via browser > Manage Jenkins > Manage Credentials > 
+   Stores scoped to Jenkins > (global) > Add Credentials > kind 'Secret text' > Paste private key Slack sebelumnya > Isi bagian 'ID' dengan nama username yang akan dipakai, misal 'slack-token' > 
+   Tambahkan deskripsi 'Slack Token Notification' > OK
+
+3. Setup Jenkins Slack Configuration
+   Dashboard > Manage Jenkins > Configure System > Scroll ke bawah ke bagian 'Slack' > Isi bagian 'Workspace' dengan url workspace Slack yang digunakan (tanpa http), misal 'tokohidayatteam' >
+   Pada 'Credentials' pilih 'Slack Token Notification' > Pada bagian 'Default channel / member id' isi dengan 'jenkins-notification' > Pilih 'Test Connection' > Save 
+
+5. Konfigurasi Post Build Action
+   Dashboard > Pilih Job yang akan digunakan > Configure > Scroll ke bagian paling bawah sampai menemukan 'Post-build Actions' > Pada bagian 'Add post built action', pilih 'Slack Notifications' >
+   Pilih notifikasi apa saja yang ingin diaktifkan > Disini juga kita bisa mengganti workspace Slack, credentials beserta channel-nya. jika sama dengan default sebelumnya, kosongkan saja > 
+   Save > Build Now
+

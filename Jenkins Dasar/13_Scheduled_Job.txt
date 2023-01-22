@@ -1,0 +1,15 @@
+### SCHEDULED JOB ###
+
+Secara default Job di Jenkins hanya akan berjalan jika kita melakukan trigger build secara manual.
+Kadang ada kasus dimana kita ingin menjalankan Jenkins Job dengan scheduled yang pasti, misal tiap jam 12 malam, atau bahkan tiap jam, tiap menit, dan sebagainya.
+Contoh kasus, misal kita ingin menjalankan backup database tiap jam 12 malam misalnya.
+
+##melakukan Build Periodically
+Untuk membuat Scheduled Job, kita cukup tambahkan informasi scheduled dalam bentuk waktu Cron pada bagian Build Periodically.
+Secara otomatis, Jenkins akan menjalankan Job tersebut sesuai dengan scheduled Cron. https://crontab.guru/ 
+
+Dashboard > Pilih Job yang akan digunakan > Configure > Build Triggers > Centang 'Build periodically' > Masukan informasi scheduled Cron > Save
+
+
+
+

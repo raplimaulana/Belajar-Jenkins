@@ -1,0 +1,6 @@
+### COPY JOB ###
+Saat membuat Job, kadang banyak sekali konfigurasi yang sama antara Job yang satu dengan Job yang lain, misal Build Stepnya sama atau Post-Build Actionnya sama.
+Jenkins memiliki fitur yang bisa digunakan untuk membuat Job baru dengan cara copy dari Job yang sudah ada.
+
+##Melakukan Copy Job
+Dashboard > New item > Masukan nama Job baru > Pilih 'Copy from' dan masukkan nama Job yang ingin kita copy > OK > Save 

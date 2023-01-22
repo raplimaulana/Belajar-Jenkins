@@ -1,0 +1,63 @@
+### PARAMETER ###
+
+Saat belajar Jenkins Dasar, kita bisa menambahkan Parameter pada Job yang kita buat.
+Di Pipeline juga kita bisa menambah parameter, dengan cara menggunakan perintah parameters.
+Parameter yang diinputkan oleh user akan secara otomatis disimpan dalam global variable.
+
+Ada banyak tipe parameter yang bisa kita gunakan, yaitu:
+•   string 
+    Untuk tipe parameter string / text.
+
+•   text
+    Mirip seperti string, namun input akan berupa multiline text area.
+
+•   booleanParam
+    Untuk tipe parameter boolean (true/false).
+
+•   choice
+    Untuk tipe parameter string / text dengan opsi pilihan yang sudah disediakan.
+
+•   password
+    Untuk tipe parameter string yang dianggap sensitif.
+
+##Kode : Parameter
+vim Jenkinsfile
+
+pipeline{
+    agent none
+    environment{
+        AUTHOR = "Rapli Maulana Aji"
+    }
+    parameters{
+        string(name: "NAME", defaultValue: "Guest", description: "What is your name?")
+        text(name: "DESCRIPTION", defaultValue: "", description: "Tell me about you?")
+        booleanParam(name: "DEPLOY", defaultValue: false, description: "Need to deploy?")
+        choice(name: "SOCIAL_MEDIA", choices: ["Instagram", "Facebook", "Twitter"], description: "Which social media you used?")                   #default value = choice pertama (Instagram)
+        password(name: "SECRET", defaultValue: "", description: "Encrypt Key")
+    }
+    options{
+        disableConcurrentBuilds()                                                                                                                  #menonaktifkan running paralel pipeline, pipeline hanya brjalan satu saja dan bergantian (tidak bisa melakukan running pipelie secara bersamaan)
+        timeout(time: 10, unit: 'MINUTES')                                                                                                         #jika pipeline berjalan lebih dari 10 menit, maka pipeline tersebut akan di abort (dibatalkan)
+    }
+    stages{
+        stage("Prepare"){
+            agent{
+                node{
+                    label "linux && java11"
+                }
+            }
+            steps{
+                echo("Author : ${AUTHOR}")
+                echo("Hello : ${params.NAME}")
+                echo("Description: ${params.DESCRIPTION}")
+                echo("Deploy: ${params.DEPLOY}")
+                echo("Social Media: ${params.SOCIAL_MEDIA}")
+                echo('Secret: $params.SECRET')
+            }
+        }
+    }
+}
+
+*Pada saat eksekusi pipeline pertama kali, dia akan langung menjalankan pipeline menggunakan default value karena belum mendapatkan source code.
+ Penggunaan input pada parameter baru bisa digunakan setelah running pipeline kedua dan seterusnya.
+

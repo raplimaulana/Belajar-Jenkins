@@ -1,0 +1,10 @@
+### JENKINS ENVIRONMENT VARIABLE ###
+Saat kita menggunakan Build Step berupa execute shell atau batch. Jenkins secara otomatis akan menambahkan environment variable yang berisikan informasi dari Job dan Jenkins nya itu sendiri.
+Kadang pada beberapa kasus, kita sering butuh informasi dari Jenkins dan Job nya.
+Kita bisa lihat semua env variable yang tersedia di Jenkins di halaman JENKINS_URL/env-vars.html/
+Untuk menggunakan env variable di shell atau batch, kita bisa gunakan tanda ${NAMA_ENV_VAR}
+
+##menggunakan environment variable
+Misalnya kita akan melihat nama job beserta build numbernya.
+
+Dashboard > Pilih Job yang akan digunakan > Configure > Build Steps > Add build step > execute shell > Isi dengan perintah, echo "Execute Job ${JOB_NAME}:${BUILD_NUMBER}"; > Save > Build Now  

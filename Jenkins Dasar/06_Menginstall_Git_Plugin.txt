@@ -1,0 +1,26 @@
+### MENGINSTALL GIT PLUGIN ###
+
+Secara default, Jenkins tidak tahu bagaimana cara mengambil kode program yang terdapat di Git.
+Kita perlu menginstall Git Plugin terlebih dahulu.
+Setelah menginstall Git Plugin, maka secara otomatis kita bisa menambahkan sumber kode dari git repository di Job yang sudah kita buat.
+
+##menginstall git plugin
+1. Menambahkan plugin git melalui browser.
+    
+    Dashboard > Manage Jenkins > Manage Plugins > Available plugins > search 'git' > Pilih 'git' > Download now and install after restart >
+    Centang 'Restart Jenkins....' agar langsung di restart 
+
+2. Setup SSH di Github.
+   Kita akan menggunakan Github sebagai Git Repository untuk menyimpan contoh project kita
+   Oleh karena itu, kita perlu melakukan setup Github terlebih dahulu, agar Jenkins bisa mengambil kode program di Github
+   Silahkan tambahkan SSH Public Key di VM Jenkins ke Github
+
+   - Buka VM yang telah dibuat di cloud.
+   - copy public key ssh. 
+     cat .ssh/id_rsa.pub
+   - Buka akun Github di browser.
+     Profile > Settings > SSH and GPG keys > New ssh key
+   - Buka Jenkins melalui Browser.
+     Dashboard > Manage Jenkins > Installed plugins > Pastikan git plugin telah terinstall 
+
+

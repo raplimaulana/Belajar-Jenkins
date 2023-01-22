@@ -1,0 +1,54 @@
+### AGENT ###
+
+Agent merupakan bagian yang digunakan untuk menentukan dimana pipeline ini dijalankan.
+Saat kita menggunakan nilai any, artinya pipeline ini akan boleh dijalankan di agent manapun.
+
+Agent Value
+
+Agent mendukung beberapa value :
+•   any 
+    Pipeline akan di eksekusi di agent manapun, termasuk master.
+
+•   none
+    Pipeline tidak akan dieksekusi di agent manapun.
+
+•   label
+    Pipeline hanya akan dijalankan di agent yang memiliki label yang sudah ditentukan.
+
+•   node
+    Sama seperti label, hanya kita bisa mengubah workspace lokasi folder secara custom.
+
+•   docker
+    Pipeline dijalankan di docker container.
+
+•   dockerfile
+    Sama seperti docker, namun image container dibuat dari dockerfile.
+
+•   kubernetes 
+    Pipeline dijalankan di kubernetes cluster.
+
+##Menambahkan Label di Agent
+Kadang ada kasus dimana kita ingin menjalankan pipeline hanya pada agent tertentu.
+Misal, kita memiliki Jenkins Agent dengan sistem operasi Fedora atau Windows misalnya, dan kita ingin Pipeline ini dijalankan pada Agent tersebut.
+Maka kita bisa mengubah nilai dari agent menjadi label atau node yang kita inginkan.
+
+Dashboard > Pilih agent yang akan digunakan > Configure > tambahkan label pada bagian 'Labels' > Save
+
+
+#Kode : Jenkinsfile
+vim Jenkinsfile
+
+pipeline{
+    agent{
+        node{
+            label "linux && java11"
+        }
+    }
+    stages{
+        stage("Hello"){
+            steps{
+                echo("Hello Pipeline")
+            }
+        }
+    }
+}

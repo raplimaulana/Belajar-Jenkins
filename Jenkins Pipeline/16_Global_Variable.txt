@@ -1,0 +1,37 @@
+### GLOBAL VARIABLE ###
+
+Saat kita membuat Job secara manual di materi Jenkins Dasar, kita bisa mendapatkan global environment variable seperti JOB_NAME, BUILD_NUMBER, dan lain-lain.
+Di Pipeline juga kita melakukan hal tersebut, namun karena di Pipeline menggunakan kode Groovy, maka untuk mendapatkan informasinya pun kita menggunakan global variable yang secara otomatis bisa diakses di groovy.
+Kita bisa melihat detailnya di JENKINS_URL/job/JOB_NAME/pipeline-syntax/globals.
+
+##Melihat Global Variable yang tersedia pada sebuah pipeline
+Dashboard > Pilih Job yang akan digunakan > Pipeline Syntax > Global Variable Reference  
+
+Variable env:
+•   env 
+    Bisa kita gunakan untuk mendapatkan informasi global dari Jenkins.
+
+•   currentBuild 
+    Bisa kita gunakan untuk mendapatkan informasi tentang proses build job yang sedang berjalan.
+
+##Kode : Global Variable
+vim Jenkinsfile 
+
+pipeline{
+    agent none
+    stages{
+        stage("Prepare"){
+            agent{
+                node{
+                    label "linux && java"
+                }
+            }
+            steps{
+                echo("Start Job : ${env.JOB_NAME}")
+                echo("Start Build : ${env.BUILD_NUMBER}")
+                echo("Branch Name : ${env.BRANCH_NAME}")
+            }
+        }
+    }
+}
+

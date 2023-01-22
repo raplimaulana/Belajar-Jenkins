@@ -1,0 +1,5 @@
+### OTHER STEPS ###
+
+Selain Basic Steps, Node and Process Steps, dan Utility Steps. Masih banyak Steps yang lain yang bisa kita gunakan. 
+Sudah banyak plugin yang tersedia yang bisa kita gunakan untuk mempermudah pembuatan pipeline https://www.jenkins.io/doc/pipeline/steps/ 
+

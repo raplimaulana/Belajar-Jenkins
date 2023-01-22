@@ -1,0 +1,34 @@
+### NODE AND PROCESS STEPS ###
+
+Salah satu steps yang sering digunakan adalah Node and Process Steps https://plugins.jenkins.io/workflow-durable-task-step/ 
+Saat kita menginstall Jenkins Pipeline, biasanya secara default sudah plugin ini pun ikut terinstall.
+Plugin ini biasanya digunakan untuk menjalankan atau mengeksekusi perintah terminal, misal shell script (unix) atau command script (windows) https://www.jenkins.io/doc/pipeline/steps/workflow-durable-task-step/ 
+
+##Kode : Node and Process Steps
+@file ada Templates/11_Node and Process Steps/mvnw
+
+vim Jenkinsfile
+
+pipeline{
+    agent{
+        node{
+            label "linux && java11"
+        }
+    }
+    stages{
+        stage("Build"){
+            steps{
+                echo("Start Build")
+                sh("./mvnw clean compile test-compile")                #contoh mengeksekusi file bernama mvnw di linux
+                echo("Finish Build")
+            }
+        }
+        stage("Test"){
+            steps{
+                echo("Start Build")
+                sh("./mvnw test")                                      #contoh mengeksekusi file bernama mvnw di linux
+                echo("Finis Build")
+            }
+        }
+    }
+}

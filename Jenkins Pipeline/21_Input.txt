@@ -1,0 +1,56 @@
+### INPUT ###
+
+Input mirip dengan parameter.
+Input adalah perintah yang bisa kita tambahkan di stage.
+Saat kita tambahkan input di stage, secara otomatis stage tersebut tidak akan berjalan sebelum input diisi oleh user.
+
+Input Option
+
+Tidak hanya Parameter, Input juga memiliki beberapa option:
+•   id
+    Merupakan identifier input, defaultnya sama dengan nama stage.
+
+•   ok
+    Text untuk tombol ok.
+
+•   submitter 
+    User yang boleh memasukkan input, bisa gunakan koma jika lebih dari satu user.
+
+•   parameters 
+    Parameter yang perlu di input oleh user.
+
+##Kode : Input
+vim Jenkinsfile
+
+pipeline{
+    agent none
+    environment{
+        AUTHOR = "Rapli Maulana Aji"
+    }
+    stages{
+        stage("Deploy"){
+            input{
+                message "Can we deploy?"
+                ok "Yes, of course"
+                submitter "rapli,maulana,aji"
+                parameters{
+                    choice(name: "TARGET_ENV", choices: ["DEV","QA","PROD"], description: "We will deploy to?")
+                }
+            }
+            agent{
+                node{
+                    label "linux && java11"
+                }
+            }
+            steps{
+                echo "Deploy to ${TARGET_ENV}"
+            }
+        }
+    }
+
+}
+
+*Jika tidak menginstall plugin, masukan input pada menu 'Paused for Input' di pipeline kita gunakan.
+ Menu ini akan muncul secara otomatis jika kita sedang menggunakan input.
+
+

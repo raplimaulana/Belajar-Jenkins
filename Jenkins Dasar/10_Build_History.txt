@@ -1,0 +1,7 @@
+### BUILD HISTORY ###
+Jenkins menyimpan seluruh riwayat build yang kita lakukan, baik itu di sukses ataupun gagal.
+Hal ini memungkinkan kita bisa melihat hasil build kita yang lama, sehingga bisa mempermudah kita ketika proses debugging.
+Selain itu, Jenkins juga memiliki fitur trend, dimana bisa memperlihatkan statistic Build History kita.
+
+##melihat Build History 
+Dashboard > Pilih Job yang akan dijalankan > Pada 'Build History' pilh 'trend' 

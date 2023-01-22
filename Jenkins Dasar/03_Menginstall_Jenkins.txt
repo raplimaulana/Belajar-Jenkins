@@ -1,0 +1,29 @@
+### MENGINSTALL JENKINS ###
+Pada kelas ini, kita akan menggunakan Linux sebagai sistem operasi yang menjalankan Jenkins nya.
+Linux digunakan karena kebanyakan di perusahaan biasanya menggunakan Linux sebagai sistem operasi untuk Jenkins.
+Tapi kita tetap bisa menggunakan sistem operasi apapun jika mau, karena Jenkins bisa berjalan di semua sistem operasi.
+
+
+##Hardware Requirements
+Minimum                       Recomended
+- 256 MB of RAM               - 4 GB+ of RAM
+- 1 GB of Drive Space         - 50 GB+ of Drive Space
+
+##Software Requirements
+- SSH
+  ssh-keygen
+
+- Java 11 http://jdk.java.net/archive/ 
+  sudo apt install openjdk-11-jdk-headless
+
+- Git https://git-scm.com/ 
+  sudo apt-get install git
+
+- Web Browser
+
+##menginstall Jenkins
+https://pkg.jenkins.io/debian-stable/
+https://phoenixnap.com/kb/install-jenkins-ubuntu
+
+https://stackoverflow.com/questions/41055669/unable-to-connect-to-jenkins-server-amazon-linux-ami/41055670#41055670
+

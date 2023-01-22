@@ -1,0 +1,20 @@
+### STEPS ###
+Steps berisikan instruksi-instruksi yang kita lakukan pada pipeline.
+
+##Kode : Steps
+vim Jenkinsfile
+
+pipeline{
+    agent{
+        node{
+            label "linux && java11"
+        }
+    }
+    stage("Build"){
+        steps{
+            echo "Build 1"
+            echo "Build 2"
+            echo "Build 3"
+        }
+    }
+}

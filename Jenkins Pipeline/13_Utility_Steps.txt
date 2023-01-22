@@ -1,0 +1,35 @@
+### UTILITY STEPS ###
+
+Utility Steps adalah plugin yang berisikan utility yang bisa kita gunakan mempermudah pembuatan pipeline. Contoh: membaca file, membuat archive file, membuat hash, dan lain-lain https://plugins.jenkins.io/pipeline-utility-steps/ 
+Biasanya secara default, plugin ini tidak tersedia di Jenkins, jadi kita harus install secara manual https://www.jenkins.io/doc/pipeline/steps/pipeline-utility-steps/ 
+
+##Menginstall Pipeline Stage View Plugin
+Dashboard > Manage Jenkins > Manage Plugins > Available plugins > search 'Pipeline Utility Steps' > Pilih 'Pipeline Utility Steps' > Download now and install after restart >
+Centang 'Restart Jenkins....' agar langsung di restart 
+
+##Kode : Utility Steps
+vim Jenkinsfile
+
+pipeline{
+    agent{
+        node{
+            label "linux && java11"
+        }
+        stages{
+            stage("Test"){
+                steps{
+                    script{
+                        def data = [
+                            "FirstName" : "Rapli",
+                            "LastName"  : "Maulana"
+                        ]
+                        writeJSON(file: "data.json", json: data)
+                    }
+                    echo("Start Build")
+                    echo("./mvnw test")
+                    echo("Finish Build")
+                }
+            }
+        }
+    }
+}

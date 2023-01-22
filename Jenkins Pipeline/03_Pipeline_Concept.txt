@@ -1,0 +1,50 @@
+### PIPELINE CONCEPT ###
+
+Sebelum kita membuat Pipeline, ada konsep-konsep yang perlu di mengerti terlebih dahulu.
+Jenkins Pipeline memiliki beberapa konsep yang perlu kita mengerti, agar tidak bingung ketika nanti kita menggunakan Jenkins Pipeline.
+
+Pipeline Concept:
+•   Pipeline
+    Pipeline adalah definisi kode continuous delivery. 
+    Sebuah pipeline berisikan seluruh instruksi kode perintah untuk proses continuous delivery, misal seperti compile, testing, deploy, dan lain-lain.
+    Kode Pipeline menggunakan kata kunci pipeline.
+
+•   Agent
+    Agent adalah machine/server bagian dari Jenkins yang digunakan untuk mengeksekusi pipeline.
+    Kode penentuan Agent menggunakan kata kunci agent.
+    Agent disebutkan di dalam kode pipeline yang kita buat.
+
+•   Stage
+    Stage adalah blok definisi tugas atau tahapan dalam pipeline, misalnya “Build”, “Test”, “Deploy”, dan lain-lain.
+    Stage biasanya ditampilkan di Jenkins seperti tahapan progress dari pipeline.
+    Biasanya dalam pipeline, akan terdapat banyak Stage.
+    Stage menggunakan kata kunci stage.
+
+•   Step
+    Step adalah sebuah intruksi atau perintah
+    Step pada dasarnya adalah perintah atau instruksi apa yang harus dilakukan oleh Jenkins
+    Sebelumnya pada materi Jenkins Dasar, kita pernah membuat step seperti perintah untuk melakukan kompilasi project, menjalankan unit test, dan lain-lain
+    Step dilakukan di dalam Stage
+    Step menggunakan kata kunci steps
+
+##Contoh Pipeline
+pipeline {
+    agent any                              #eksekusi pipeline di agent (Node server) mana saja yang tersedia
+    stages{
+        stage('Build') {
+            steps{
+                //
+            }
+        }
+        stage('Test'){
+            steps{
+                //
+            }
+        }
+        stage('Deploy'){
+            steps{
+                //
+            }
+        }
+    }
+}

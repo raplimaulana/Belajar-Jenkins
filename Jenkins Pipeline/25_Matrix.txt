@@ -1,0 +1,158 @@
+### MATRIX ###
+
+Matrix adalah fitur yang bisa digunakan untuk mendefinisikan multi dimensi matrix yang berisi kombinasi name-value, dan dijalankan secara parallel.
+Matrix sangat powerfull, karena bisa menjalankan stage secara parallel dengan kombinasi matrix yang sudah ditentukan.
+Karena Matrix berjalan parallel, sama seperti Parallel, kita juga bisa gunakan option failFast atau parallelAlwaysFailFast().
+
+##Kode : Matrix
+vim Jenkinsfile
+
+pipeline{
+    agent none
+    stages{
+        stage("OS Setup"){
+            matrix{
+                axes{
+                    axis{
+                        name "OS"
+                        values "linux", "windows", "mac"
+                    }
+                    axis{
+                        name "ARC"
+                        values "32", "64"                      
+                    }
+                }
+            }
+        }
+    }
+}
+
+*Nanti akan dibuat 6 stage baru secara otomatis
+ - stage(Matrix - OS = 'linux', ARC = '32')
+ - stage(Matrix - OS = 'windows', ARC = '32')
+ - stage(Matrix - OS = 'mac', ARC = '32')
+ - stage(Matrix - OS = 'linux', ARC = '64')
+ - stage(Matrix - OS = 'windows', ARC = '64')
+ - stage(Matrix - OS = 'mac', ARC = '64')
+
+
+
+
+### MATRIX CELL ##
+
+Saat kita membuat axis di matrix, secara otomatis nanti stage akan di build menggunakan kombinasi dari matrix axis value tersebut, atau disebut Matrix Cell.
+Pada kode diatas, artinya dari dua axis, akan bisa jadi beberapa kombinasi OS + ARC.
+linux 32, linux 64, windows 32, windows 64, mac 32, mac 64.
+Secara otomatis di Stage kita bisa ambil data axis dari environment variable.
+
+Kode : Matrix Stages
+vim Jenkinsfile
+
+pipeline{
+    agent none
+    stages{
+        stage("OS Setup"){
+            matrix{
+                axes{
+                    axis{
+                        name "OS"
+                        values "linux", "windows", "mac"
+                    }
+                    axis{
+                        name "ARC"
+                        values "32", "64"
+                    }
+                }
+                stages{                                    #Stages matriks yang telah dibuat sebelumnya, akan menjalankan seluruh stage dan steps berikut. Jika ada 6 matriks stages, makan ke 6 stage tersebut akan mengeksekusi perintah dibawah ini
+                    stage("Execution OS Setup"){
+                        agent{
+                            node{
+                                label "linux && java11"
+                            }
+                        }
+                        steps{
+                            echo("Setup ${OS} ${ARC}")
+                        }
+                    }   
+                }
+            }
+        }
+    }
+}
+
+*Nanti akan dibuat stage baru secara otomatis
+ - stage(Matrix - OS = 'linux', ARC = '32')
+ - stage(Matrix - OS = 'windows', ARC = '32')
+ - stage(Matrix - OS = 'mac', ARC = '32')
+ - stage(Matrix - OS = 'linux', ARC = '64')
+ - stage(Matrix - OS = 'windows', ARC = '64')
+ - stage(Matrix - OS = 'mac', ARC = '64')
+ - OS Setup
+ - OS Setup
+ - OS Setup
+ - OS Setup
+ - OS Setup
+ - OS Setup
+
+##Exclude Matrix Cell
+Matrix juga memiliki perintah exclude, jika kita ingin meng-exclude cell tertentu.
+Misal pada kasus kita, kita ingin meng exclude mac 32, karena misal sudah tidak ada versi mac 32.
+
+##Kode : Exclude
+vim Jenkinsfile
+
+pipeline{
+    agent none
+    stages{
+        stage("OS Setup"){
+            matrix{
+                axes{
+                    axis{
+                        name "OS"
+                        values "linux", "windows", "mac"
+                    }
+                    axis{
+                        name "ARC"
+                        values "32", "64"
+                    }
+                }
+                excludes{
+                    exclude{
+                        axis{
+                            name "OS"
+                            values "mac"
+                        }
+                        axis{
+                            name "ARC"
+                            values "32"                    #Stage dengan OS=mac dan ARC = 32 tidak akan dibuat
+                        }
+                    }
+                }
+                stages{                                    #Stages matriks yang telah dibuat sebelumnya, akan menjalankan seluruh stage dan steps berikut. Jika ada 5 matriks stages, makan ke 5 stage tersebut akan mengeksekusi perintah dibawah ini
+                    stage("Execution OS Setup"){
+                        agent{
+                            node{
+                                label "linux && java11"
+                            }
+                        }
+                        steps{
+                            echo("Setup ${OS} ${ARC}")
+                        }
+                    }   
+                }
+            }
+        }
+    }
+}
+
+*Nanti akan dibuat stage baru secara otomatis
+ - stage(Matrix - OS = 'linux', ARC = '32')
+ - stage(Matrix - OS = 'windows', ARC = '32')
+ - stage(Matrix - OS = 'linux', ARC = '64')
+ - stage(Matrix - OS = 'windows', ARC = '64')
+ - stage(Matrix - OS = 'mac', ARC = '64')
+ - OS Setup
+ - OS Setup
+ - OS Setup
+ - OS Setup
+ - OS Setup

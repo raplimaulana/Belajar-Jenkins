@@ -1,0 +1,25 @@
+### JENKINSFILE ###
+
+Walaupun kita bisa membuat kode Pipeline di Jenkins Job, tapi pada kenyataannya biasanya kita akan membuat kode pipeline di file Jenkinsfile.
+File Jenkinsfile tersebut biasanya disimpan di repository project kita.
+
+##Membuat Pipeline Job yang Terintegrasi dengan Github
+Akses Jenkins via browser > Dashboard > Pilih pipeline yang akan digunakan > Scroll ke bawah ke bagian 'Pipeline' > Pilih 'Pipeline script SKM' > Pada bagian 'SCM', pilih 'Git' > 
+Masukan link repository Githubnya > Pilih credential sesuai dengan akun Github yang digunakan > Pada 'Branch Specifier', ubah menjadi branch yang digunakan. Misal 'main' >
+Jika ingin mengganti direktori file script yang disimpan, ubah bagian 'Script Path' > Save > Build Now
+
+##Kode : Jenkinsfile
+vim Jenkinsfile
+
+pipeline{
+    agent any
+    stages{
+        stage("Hello"){
+            steps{
+                echo "Hello World"
+            }
+        }
+    }
+}
+
+##Jenkins Pipeline Job
