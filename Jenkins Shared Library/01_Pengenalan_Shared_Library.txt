@@ -1,0 +1,11 @@
+### PENGENALAN SHARED LIBRARY ###
+
+Share Library adalah salah satu fitur di Jenkins Pipeline untuk menyimpan kode pipeline di repository terpisah dari Project yang menggunakan pipeline tersebut.
+Saat kita menginstall Jenkins Pipeline, secara otomatis kita bisa menggunakan fitur Shared Library.
+
+Kenapa Shared Library?
+
+Keuntungan kita menggunakan Shared Library adalah, kita tidak perlu membuat pipeline secara manual satu per satu di tiap project. 
+Kita bisa membuat centralized repository yang berisikan pipeline, dan project yang membutuhkan pipeline tinggal menggunakan pipeline yang sudah dibuat di Shared Library.
+Shared Library membutuhkan SCM seperti Git, jadi pastikan nanti kita menyimpan Shared Library di project repository seperti Git.
+

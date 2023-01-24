@@ -1,0 +1,42 @@
+### MENGAKSES STEPS ###
+
+Jika kita memang ingin mengakses Jenkins Pipeline Library dari Groovy Class.
+Kita bisa kirim object Steps melalui parameter. 
+Nanti secara otomatis kita bisa mengakses Jenkins Pipeline Library melalui parameter tersebut.
+
+#Kode : Mengakses Steps
+@file ada di belajar-jenkins-shared-library/src/belajar/jenkins/Output.groove
+
+vim Output.groove
+
+package belajar.jenkins;
+
+class Output{
+    static def hello(steps, String name){
+        steps.echo("Hello ${name}")               #disini kita bisa menggunakan function jenkins pipeline library
+    }
+}
+
+
+
+#Kode : Jenkinsfile
+@file ada di belajar-jenkins-shared-library-app/Jenkinsfile  
+
+vim Jenkinsfile
+
+@Library("belajar-jenkins-shared-library@main")_ 
+
+import belajar.jenkins.Output;
+
+pipeline{
+    agent any
+    stages{
+        stage("Hello Groovy"){
+            steps{
+                script{
+                    Output.hello(this, "Groovy")
+                }
+            }
+        }
+    }
+}

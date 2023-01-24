@@ -1,0 +1,56 @@
+### MAP PARAMETER ###
+
+Selain tipe data List, Groovy juga memiliki tipe data Map.
+Tipe data Map sangat cocok digunakan ketika kita ingin membuat parameter yang kompleks, dimana dalam Map, kita bisa menyebutkan kata kunci dan juga nilai datanya https://www.baeldung.com/groovy-maps 
+
+#Kode : Map Parameter
+file ada di belajar-jenkins-shared-library/vars/hello.groovy
+
+vim hello.groovy
+
+def person(Map person){
+    echo("Hello ${person.firstName} ${person.lastName}")
+}
+
+
+
+#Kode : Output.groove
+@file ada di belajar-jenkins-shared-library/src/belajar/jenkins/Output.groove
+
+vim Output.groove
+
+package belajar.jenkins;
+
+class Output{
+    static def hello(steps, String name){
+        steps.echo("Hello ${name}")                                                #disini kita bisa menggunakan function jenkins pipeline library
+    }
+}
+
+
+
+#Kode : Jenkinsfile
+@file ada di belajar-jenkins-shared-library-app/Jenkinsfile
+
+@Library("belajar-jenkins-shared-library@main")_
+
+import belajar.jenkins.Output;
+
+pipeline{
+    agent any
+    stages{
+        stage("Hello Person"){
+            steps{
+                script{
+                  hello.person([
+                    firstName: "Rapli",
+                    lastName: "Maulana"
+                  ])
+                }
+            }
+        }
+    }
+}
+
+
+

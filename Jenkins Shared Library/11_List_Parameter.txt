@@ -1,0 +1,59 @@
+### LIST PARAMETER ###
+
+Parameter di Groovy bisa menerima lebih dari satu parameter.
+Tapi kadang-kadang kita ingin mengirim data parameter misal yang tidak menentu jumlahnya.
+Pada kasus ini, kita bisa menggunakan tipe data List.
+List di Groovy adalah tipe data yang bisa digunakan untuk menampung banyak data dalam satu variable / parameter.
+Dan untuk mengirim parameter dalam bentuk List, kita bisa gunakan [] dimana di dalamnya kita bisa sebutkan datanya, jika lebih dari satu, bisa kita tambahkan pemisah , (koma), misal:
+[“clean”, “compile”, “test”]
+https://www.baeldung.com/groovy-lists 
+
+#Kode : List Parameter
+file ada di belajar-jenkins-shared-library/vars/maven.groovy
+
+vim maven.groovy
+
+def call(List commands){
+    for(command in commands){
+        sh("./mvnw ${command}")
+    }
+}
+
+
+
+#Kode : Output.groove
+@file ada di belajar-jenkins-shared-library/src/belajar/jenkins/Output.groove
+
+vim Output.groove
+
+package belajar.jenkins;
+
+class Output{
+    static def hello(steps, String name){
+        steps.echo("Hello ${name}")                                                #disini kita bisa menggunakan function jenkins pipeline library
+    }
+}
+
+
+
+#Kode : Jenkinsfile
+@file ada di belajar-jenkins-shared-library-app/Jenkinsfile
+
+@Library("belajar-jenkins-shared-library@main")_
+
+import belajar.jenkins.Output;
+
+pipeline{
+    agent any
+    stages{
+        stage("Maven Compile"){
+            steps{
+                script{
+                    maven(["clean", "compile", "test"])
+                }
+            }
+        }
+    }
+}
+
+

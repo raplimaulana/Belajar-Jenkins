@@ -1,0 +1,65 @@
+### GROOVY CLASS ###
+
+Jika kita sudah belajar tentang bahasa pemrograman Groovy .
+Kita bisa membuat kode-kode misal class Groovy di dalam folder 'src' https://groovy-lang.org/ 
+
+#Kode : Shared Library
+@file ada di belajar-jenkins-shared-library/src/belajar/jenkins/Output.groovy           
+
+vim Output.groovy
+
+package belajar.jenkins;
+
+class Output{
+    static def hello(String name){
+        echo("Hello ${name}")
+    }
+}
+
+
+
+##Menggunakan Groovy Class
+Untuk menggunakan Groovy Class, kita bisa import di Jenkinsfile dan bisa kita gunakan secara otomatis.
+Mirip dengan kode Groovy.
+
+#Kode : Jenkinsfile
+@file ada di belajar-jenkins-shared-library-app/Jenkinsfile  
+
+vim Jenkinsfile
+
+@library("belajar-jenkins-shared-library@main")_
+
+import belajar.jenkins.Output;
+
+pipeline{
+    agent any
+    stages {
+        stage("Hello Groovy"){
+            steps{
+                script{
+                    Output.hello("Groovy")
+                }
+            }
+        }
+    }
+}
+
+
+*Akan terjadi error, hal ini dikarenakan function echo() adalah function dari Jenkins Pipeline Library.
+ Sedangkan jika kita menggunakan Groovy Class, kita hanya bisa menggunakan fitur di bahasa pemrograman Groovy.
+ Contoh untuk menampilkan tulisan, di Groovy bisa menggunakan println().
+
+
+
+#Kode : Shared Library
+@file ada di belajar-jenkins-shared-library/src/belajar/jenkins/Output.groovy           
+
+vim Output.groovy
+
+package belajar.jenkins;
+
+class Output{
+    static def hello(String name){
+        println("Hello ${name}")          #outputnya hanya diperlihatkan didalam script stage, tidak ditampilkan keluar pipeline karena tidak menggunakan echo
+    }
+}

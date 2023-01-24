@@ -1,0 +1,62 @@
+### DEFAULT FUNCTION ###
+
+Kita juga bisa membuat sebuah Default Function dalam Global Variable.
+Default Function adalah function yang diakses secara otomatis ketika kita panggil Global Variable nya sebagai function, misal author().
+Kita bisa membuat function dengan nama call() di file Global Variable nya.
+
+#Kode : Default Function
+@file ada di belajar-jenkins-shared-library/vars/author.groovy
+
+vim author.groovy
+
+def call(){
+    "Rapli Maulana Aji - Subang"
+}
+
+def name(){
+    "Rapli Maulana Aji"
+}
+
+def address(){
+    "Subang"
+}
+
+
+
+#Kode : Output.groove
+@file ada di belajar-jenkins-shared-library/src/belajar/jenkins/Output.groove
+
+vim Output.groove
+
+package belajar.jenkins;
+
+class Output{
+    static def hello(steps, String name){
+        steps.echo("Hello ${name}")                                                #disini kita bisa menggunakan function jenkins pipeline library
+    }
+}
+
+
+
+#Kode : Jenkinsfile
+@file ada di belajar-jenkins-shared-library-app/Jenkinsfile
+
+@Library("belajar-jenkins-shared-library@main")_
+
+import belajar.jenkins.Output;
+
+pipeline{
+    agent any
+    stages{
+        stage("Global Variable"){
+            steps{
+                script{
+                    echo(author())
+                    echo(author.name())
+                    echo(author.address())
+                }
+            }
+        }
+    }
+}
+

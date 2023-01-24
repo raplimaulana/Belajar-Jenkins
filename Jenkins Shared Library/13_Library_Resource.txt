@@ -1,0 +1,61 @@
+### LIBRARY RESOURCE ###
+
+Seperti yang sudah kita bahas di awal, bahwa folder resources adalah tempat kita menyimpan data bukan script, misal text, json, gambar, dan lain-lain.
+Sekarang bagaimana caranya jika kita ingin mengambil data tersebut?
+Kita bisa menggunakan function di Groovy Pipeline bernama libraryResource(lokasi).
+Dimana libraryResource akan mencari file di resources/lokasi yang kita cari.
+Misal libraryResource(“json/person.json”), artinya akan mengambil file dari resources/json/person.json
+Hasil dari function libraryResource adalah text isi file tersebut.
+
+#Kode : Library Resource
+file ada di belajar-jenkins-shared-library/resources/config/build.json
+
+vim build.json
+
+{
+    "app": "Belajar Jenkins Shared Library",
+    "author": "Rapli Maulana Aji"
+}
+
+
+
+#Kode : Output.groove
+@file ada di belajar-jenkins-shared-library/src/belajar/jenkins/Output.groove
+
+vim Output.groove
+
+package belajar.jenkins;
+
+class Output{
+    static def hello(steps, String name){
+        steps.echo("Hello ${name}")                                                #disini kita bisa menggunakan function jenkins pipeline library
+    }
+}
+
+
+
+#Kode : Jenkinsfile
+@file ada di belajar-jenkins-shared-library-app/Jenkinsfile
+
+@Library("belajar-jenkins-shared-library@main")_
+
+import belajar.jenkins.Output;
+
+pipeline{
+    agent any
+    stages{
+        stage("Library Resource"){
+            steps{
+                script{
+                  def config = libraryResource("config/build.json")
+                  echo(config)
+                }
+            }
+        }
+    }
+}
+
+
+
+
+

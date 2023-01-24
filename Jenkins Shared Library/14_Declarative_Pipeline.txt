@@ -1,0 +1,95 @@
+### DECLARATIVE PIPELINE ###
+
+Shared Library mendukung pembuatan Pipeline, hal ini mempermudah ketika kita ingin membuat Pipeline di Shared Library.
+Sehingga kode di Jenkinsfile akan semakin mudah, tidak perlu membuat Pipeline, hanya tinggal memanggil function yang terdapat di Shared Library.
+
+#Kode : maven.groovy
+file ada di belajar-jenkins-shared-library/vars/maven.groovy
+
+vim maven.groovy
+
+def call(List command){
+    for(command in commands){
+        sh("./mvnw ${command}")
+    }
+}
+
+
+
+#Kode : Maven Pipeline
+file ada di belajar-jenkins-shared-library/vars/mavenPipeline.groovy
+
+vim mavenPipeline.groovy
+
+def call(){
+    pipeline{
+        agent any
+        stages{
+            stage("Maven Clean"){
+                steps{
+                    script{
+                        maven(["clean"])
+                    }
+                }
+            }
+            stage("Maven Compile"){
+                steps{
+                    script{
+                        maven(["compile"])
+                    }
+                }
+            }
+        }
+    }
+}
+
+#Kode : Jenkinsfile
+@file ada di belajar-jenkins-shared-library-app/Jenkinsfile
+
+@Library("belajar-jenkins-shared-library@main")_
+
+mavenPipeline()
+
+
+
+
+
+
+### LOGIC DI DECLARATIVE PIPELINE ###
+
+Kita juga bisa menambahkan logic di Declarative Pipeline.
+Misal, kita bisa gunakan if else untuk mengeksekusi Declarative Pipeline misalnya.
+
+#Kode : Pzn Pipeline
+file ada di belajar-jenkins-shared-library/vars/pznPipeline.groovy
+
+vim pznPipeline.groovy
+
+def call(Map config){
+    if(config.type == "maven"){
+        mavenPipeline()
+    }
+    else{
+        pipeline{
+            agent any
+            stages{
+                stage("Unsupported Type"){
+                    steps{
+                        script{
+                            echo("Unsupported Type !!!")
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#Kode : Jenkinsfile
+
+#Kode : Jenkinsfile
+@file ada di belajar-jenkins-shared-library-app/Jenkinsfile
+
+@Library("belajar-jenkins-shared-library@main")_
+
+pznPipeline([type: "maven"])

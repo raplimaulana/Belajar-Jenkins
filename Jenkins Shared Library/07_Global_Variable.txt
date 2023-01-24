@@ -1,0 +1,7 @@
+### GLOBAL VARIABLE ###
+
+Saat kita membuat file Groovy di folder 'vars', secara otomatis file tersebut akan menjadi Global Variable yang bisa diakses melalui Jenkinsfile.
+Nama Global Variable akan sama dengan nama file nya, misal jika nama file adalah author.groovy, maka nama variable nya adalah author
+Semua definisi function, variable, dan class di file tersebut, bisa diakses melalui Global Variable.
+
+

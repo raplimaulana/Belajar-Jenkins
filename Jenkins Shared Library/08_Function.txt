@@ -1,0 +1,55 @@
+### FUNCTION ###
+
+Kita bisa menambahkan function di dalam file Groovy di 'vars', yang nanti secara otomatis bisa diakses sebagai function di Global Variable.
+Jika kita membuat function name() di file author.groovy, maka secara otomatis bisa diakses menggunakan author.name()
+
+#Kode : Function
+@file ada di belajar-jenkins-shared-library/vars/author.groovy
+
+vim author.groovy
+
+def name(){
+    "Rapli Maulana Aji"
+}
+
+def address(){
+    "Subang"
+}
+
+
+
+#Kode : Output.groove
+@file ada di belajar-jenkins-shared-library/src/belajar/jenkins/Output.groove
+
+vim Output.groove
+
+package belajar.jenkins;
+
+class Output{
+    static def hello(steps, String name){
+        steps.echo("Hello ${name}")                                                #disini kita bisa menggunakan function jenkins pipeline library
+    }
+}
+
+
+
+#Kode : Jenkinsfile
+@file ada di belajar-jenkins-shared-library-app/Jenkinsfile
+
+@Library("belajar-jenkins-shared-library@main")_
+
+import belajar.jenkins.Output;
+
+pipeline{
+    agent any
+    stages{
+        stage("Global Variable"){
+            steps{
+                script{
+                    echo(author.name())
+                    echo(author.address())
+                }
+            }
+        }
+    }
+}

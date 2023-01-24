@@ -1,0 +1,6 @@
+### REGISTRASI SHARED LIBRARY ###
+Sebelum kita bisa menggunakan Shared Library yang sudah kita buat, kita wajib meregistrasikan terlebih dahulu ke Jenkins.
+
+##Melakukan Registrasi Shared Library
+Dashboard > Manage Jenkins > Configure System > pada bagian 'Global Pipeline Libraries', pilih 'Add' > Masukan nama Library yang akan dibuat (biasanya sama dengan nama project di Github) >
+Pada bagian 'Retrieval method', pilih 'Modern SCM' > Masukan link project repository Github beserta credential untuk mengaksesnya > Jika ada lebih dari satu, silahkan tambahkan library lagi > Save 

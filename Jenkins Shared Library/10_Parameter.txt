@@ -1,0 +1,57 @@
+### PARAMETER ###
+
+Sebelumnya kita sudah menggunakan parameter di function.
+Karena function di Jenkins Pipeline adalah sebuah Groovy Function, jadi secara otomatis kita bisa melakukan layaknya function di Groovy, contohnya menambahkan Parameter.
+Parameter adalah data yang kita kirim ke function tersebut, bisa satu atau lebih.
+Jika function memiliki parameter, secara otomatis kita perlu mengirim data parameter ketika memanggil function nya.
+
+#Kode : vars/maven.groovy
+@file ada di belajar-jenkins-shared-library/vars/maven.groovy
+
+vim maven.groovy
+
+def call(String command){
+    sh("./mvnw ${command})
+}
+
+
+
+Kenapa Bisa Mengakses Jenkins Pipeline Library?
+
+Berbeda dengan Groovy Class di directory src, Global Variable di vars bisa mengakses Jenkins Pipeline Library.
+Oleh karena itu, sangat direkomendasikan menggunakan Global Variable jika membuat script yang butuh Jenkins Pipeline Library.
+
+#Kode : Output.groove
+@file ada di belajar-jenkins-shared-library/src/belajar/jenkins/Output.groove
+
+vim Output.groove
+
+package belajar.jenkins;
+
+class Output{
+    static def hello(steps, String name){
+        steps.echo("Hello ${name}")                                                #disini kita bisa menggunakan function jenkins pipeline library
+    }
+}
+
+
+
+#Kode : Jenkinsfile
+@file ada di belajar-jenkins-shared-library-app/Jenkinsfile
+
+@Library("belajar-jenkins-shared-library@main")_
+
+import belajar.jenkins.Output;
+
+pipeline{
+    agent any
+    stages{
+        stage("Maven Compile"){
+            steps{
+                script{
+                    maven("clean compile")
+                }
+            }
+        }
+    }
+}

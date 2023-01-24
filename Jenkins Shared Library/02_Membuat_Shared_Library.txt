@@ -1,0 +1,24 @@
+### MEMBUAT SHARED LIBRARY ###
+
+Untuk membuat Jenkins Shared Library, caranya sangat mudah, kita hanya perlu membuat folder berisi kode Groovy yang strukturnya sudah ditentukan.
+Dan setelah membuatnya, jangan lupa untuk menyimpannya di Git Repository.
+Hal ini karena Jenkins Shared Library akan menggunakan Git untuk menyimpan dan menggunakan di Jenkins Job yang membutuhkannya.
+
+Struktur Folder Shared Library:
+•   resources: berisikan file yang bukan berisi kode program, misal text, json, gambar, dan lain-lain
+•   src : berisikan class kode program Groovy
+•   vars : berisikan file groovy
+
+##Kode : Hello World
+@file ada Templates/02_Membuat Shared Library/vars/hello.groovy
+
+vim hello.groovy
+
+def world(){
+    echo("Hello World")
+}
+
+##Git Repository
+Setelah membuat project, silahkan simpan di Git Repository
+
+
